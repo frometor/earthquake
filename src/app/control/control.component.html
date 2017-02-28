@@ -1,0 +1,16 @@
+<div class="col-md-4">
+  <div>
+    <select #duration (change)="onChanged(magnitude.value,duration.value)" class="custom-select">
+      <option disabled value=day>please select</option>
+      <option *ngFor="let time of earthquakeTiming" value={{time.duration}}>{{time.duration}}</option>
+    </select>
+  </div>
+  <div>
+    <select #magnitude (change)="onChanged(magnitude.value,duration.value)" class="custom-select">
+      <option disabled value=all>please select</option>
+      <option *ngFor="let time of earthquakeMagnitude" value={{time.mag}}>{{time.mag}}</option>
+    </select>
+  </div>
+ <!-- <button type="button" class="btn btn-default navbar-btn" (click)="onClickedless()"><3</button>
+  <button type="button" class="btn btn-default navbar-btn" (click)="onClickedmore()">>3</button>-->
+</div>
