@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response,URLSearchParams } from '@angular/http';
-import { Jsonp } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response, URLSearchParams, Request, RequestOptions, RequestMethod} from '@angular/http';
+import {Jsonp} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
@@ -11,19 +11,21 @@ import 'rxjs/Rx';
 export class EarthquakeService {
 
   // Resolve HTTP using the constructor
-  constructor(private _http: Http, private _jsonp: Jsonp) { }
-  //  private earthquakeUrl = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojsonp";
-  private earthquakeUrl = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/";
+  constructor(private _http: Http, private _jsonp: Jsonp) {
+  }
 
-  getEarthquakes(magnitude:string,duration:string) {
-console.log("MAGNITUDE",magnitude);
-    console.log("DURATION",duration);
+  private earthquakeUrl = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/";
+  headers = new Headers();
 
-    // return this._http.get(this.earthquakeUrl, {
-    return this._http.get(this.earthquakeUrl+magnitude+"_"+duration+".geojson")
-    .map((response:Response)=>response.json());
-     /* .map(this.extractData)
-      .catch(this.handleError);*/
+  getEarthquakes(magnitude: string, duration: string):Observable<any[]> {
+
+    return this._http.get(this.earthquakeUrl + magnitude + "_" + duration + ".geojson")
+      .map(function (res: Response){
+        return res.json() || {};
+      })
+      .catch(this.handleError)
+      .finally(() => {
+      });
   }
 
   private extractData(res: Response) {

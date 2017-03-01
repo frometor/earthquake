@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, Output, EventEmitter} from '@angular/core';
 import {MapService} from "../map.service";
 import {EarthquakeService} from "../earthquake.service";
 import {IconcontrolService} from "../iconcontrol.service";
+import {ChartdataService} from "../chartdata.service";
 
 @Component({
   selector: 'app-control',
@@ -9,13 +10,15 @@ import {IconcontrolService} from "../iconcontrol.service";
   styleUrls: ['./control.component.css']
 })
 export class ControlComponent {
+  @Output() chartDataCreated = new EventEmitter();
   _data: any;
+  createdData;
 
-  constructor(private mapService: MapService, private iconcontrolService: IconcontrolService, private earthquakeService: EarthquakeService) {
+  constructor(private mapService: MapService, private iconcontrolService: IconcontrolService, private earthquakeService: EarthquakeService, private chartdataService: ChartdataService) {
   }
 
   earthquakeMagnitude = [
-    {"mag": "all"},
+    /*{"mag": "all"},*/
     {"mag": "significant"},
     {"mag": "4.5"},
     {"mag": "2.5"},
@@ -29,33 +32,6 @@ export class ControlComponent {
     /* {"duration": "month"}*/
   ];
 
-  onClickedless() {
-    this.iconcontrolService.deleteIcons();
-
-    /* console.log("clicked");
-     this.earthquakeService.getEarthquakes("all_day").subscribe(
-     (data: any) => {
-     console.log(data);
-     this._data = data;
-     //this.createIcons(this._data);
-     })*/
-  }
-
-  onClickedmore() {
-
-    // map has markers layer
-    if (this.mapService.map.hasLayer(this.mapService.markers)) {
-      return;
-    }
-    /*
-     this.earthquakeService.getEarthquakes("all_day").subscribe(
-     (data: any) => {
-     console.log(data);
-     this._data = data;
-     this.iconcontrolService.createIcons(this._data);
-     });*/
-  }
-
   onChanged(magnitude, duration) {
 
     this.iconcontrolService.deleteIcons();
@@ -63,7 +39,10 @@ export class ControlComponent {
       (data: any) => {
         this._data = data;
         this.iconcontrolService.createIcons(this._data);
+        this.createdData = this.chartdataService.createData(this._data);
+        this.chartDataCreated.emit(this.createdData);
       });
+
   }
 
 }
