@@ -33,13 +33,13 @@ export class ChartdataService {
         this.lessThanElse.push(data.features[i].properties["mag"]);
       }
     }
-    this.chartDataService.push([`between 0 and 1`,
+    this.chartDataService.push([`< 1`,
       this.lessThan1.length]);
-    this.chartDataService.push([`between 1 and 2.5`,
+    this.chartDataService.push([`> 1 and < 2.5`,
       this.lessThan2_5.length]);
-    this.chartDataService.push([`between 2.5 and 4.5`,
+    this.chartDataService.push([`> 2.5 and < 4.5`,
       this.lessThan4_5.length]);
-    this.chartDataService.push([`higher than 4.5`,
+    this.chartDataService.push([`> 4.5`,
       this.lessThanElse.length]);
 
     return this.chartDataService;

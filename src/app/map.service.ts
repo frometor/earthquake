@@ -34,7 +34,7 @@ export class MapService {
 
     this.map = L.map('map', {
       center: [52.45, 13.29],
-      zoom: 3,
+      zoom: 4,
       layers: [this.World_Imagery, this.Stamen_TonerLite]
     });
 
