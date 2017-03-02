@@ -3,19 +3,19 @@
     <div class="panel-heading">Time Period</div>
     <div class="panel-body">
       <select #duration (change)="onChanged(magnitude.value,duration.value)" class="custom-select">
-        <option disabled value=day>please select</option>
+        <option disabled value=null>please select</option>
         <option *ngFor="let time of earthquakeTiming" value={{time.duration}}>{{time.duration}}</option>
       </select>
     </div>
   </div>
+
   <div class="panel panel-default">
-    <div class="panel-heading">minimum Magnitude</div>
+    <div class="panel-heading">Minimum Magnitude</div>
     <div class="panel-body">
       <select #magnitude (change)="onChanged(magnitude.value,duration.value)" class="custom-select">
-        <option value=all>all</option>
+        <option value="all">all</option>
         <option *ngFor="let time of earthquakeMagnitude" value={{time.mag}}>{{time.mag}}</option>
       </select>
     </div>
   </div>
-
 </div>

@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MapService} from "./map.service";
-import {FeatureGroup} from 'leaflet';
-
 
 @Component({
   selector: 'app-root',
@@ -13,17 +11,16 @@ export class AppComponent implements OnInit {
 
   private chartData: Array<any>;
 
-  public markers: FeatureGroup;
-
   constructor(private mapService: MapService) {
   }
 
   ngOnInit() {
-    this.mapService.initialize();
+   // this.mapService.initialize();
   }
-
+/*
+  // handles the Event emitted by control.component
   handleChartDataCreated(newChartData) {
     this.chartData = newChartData;
-  }
+  }*/
 
 }

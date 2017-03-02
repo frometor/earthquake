@@ -1,11 +1,4 @@
-<div id="main" class="row">
-  <div class="col-md-6">
-    <app-control (chartDataCreated)="handleChartDataCreated($event)"></app-control>
-    <app-chart *ngIf="chartData" [data]="chartData"></app-chart>
-  </div>
-  <div class="col-md-6">
-    <div id="map" style="height: 100vh;">
-
-    </div>
-  </div>
+<app-navbar></app-navbar>
+<div class="container-fluid">
+  <router-outlet></router-outlet>
 </div>

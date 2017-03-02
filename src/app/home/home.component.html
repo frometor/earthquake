@@ -1,0 +1,15 @@
+<!-- Main div of HomeComponent including Control- and ChartComponent as well as Map-->
+<div id="main" class="row">
+
+  <!--Control and Bar Chart Component div -->
+  <div id="controlChart" class="col-md-4 col-sm-12">
+    <app-control (chartDataCreated)="handleChartDataCreated($event)"></app-control>
+    <app-chart *ngIf="chartData" [data]="chartData"></app-chart>
+  </div>
+
+  <!-- Map div-->
+  <div class="col-md-8 col-sm-12">
+    <div id="map">
+    </div>
+  </div>
+</div> <!--./main-->

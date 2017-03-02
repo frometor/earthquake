@@ -1,4 +1,4 @@
-import {Injectable, Output, EventEmitter} from '@angular/core';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class ChartdataService {
@@ -39,10 +39,9 @@ export class ChartdataService {
       this.lessThan2_5.length]);
     this.chartDataService.push([`between 2.5 and 4.5`,
       this.lessThan4_5.length]);
-    this.chartDataService.push([`more than 4.5`,
+    this.chartDataService.push([`higher than 4.5`,
       this.lessThanElse.length]);
 
-    console.log(this.chartDataService);
     return this.chartDataService;
   }
 }

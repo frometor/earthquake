@@ -11,7 +11,7 @@ export class ChartComponent implements OnInit, OnChanges {
 
   @ViewChild('chart') private chartContainer: ElementRef;
   @Input() private data: Array<any>;
-  private margin: any = { top: 20, bottom: 40, left: 40, right: 20};
+  private margin: any = {top: 20, bottom: 40, left: 40, right: 20};
   private chart: any;
   private width: number;
   private height: number;
@@ -21,7 +21,8 @@ export class ChartComponent implements OnInit, OnChanges {
   private xAxis: any;
   private yAxis: any;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
     this.createChart();
@@ -35,6 +36,16 @@ export class ChartComponent implements OnInit, OnChanges {
       this.updateChart();
     }
   }
+
+  // redraws and fits the Bar chart if Window size changes
+  onResize(event) {
+    if (this.chart) {
+      d3.select("svg").remove();
+      this.createChart();
+      this.updateChart();
+    }
+  }
+
   createChart() {
     let element = this.chartContainer.nativeElement;
     this.width = element.offsetWidth - this.margin.left - this.margin.right;
@@ -57,7 +68,7 @@ export class ChartComponent implements OnInit, OnChanges {
     this.yScale = d3.scaleLinear().domain(yDomain).range([this.height, 0]);
 
     // bar colors
-    this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]>['red', 'blue']);
+    this.colors = d3.scaleLinear().domain([0, this.data.length]).range(<any[]>['#33cccc', '#ff0000']);
 
     // x & y axis
     this.xAxis = svg.append('g')
